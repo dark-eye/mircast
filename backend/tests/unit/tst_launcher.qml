@@ -38,12 +38,12 @@ Item {
             console.debug("<< cleanupTestCase");
         }
 
-        function test_canReadAndWriteText() {
-            var expected = "Hello World 2";
+//        function test_canReadAndWriteText() {
+//            var expected = "Hello World 2";
 
-            objectUnderTest.helloWorld = expected;
+//            objectUnderTest.helloWorld = expected;
 
-            compare(expected,objectUnderTest.helloWorld,"expected did not equal result");
-        }
+//            compare(expected,objectUnderTest.helloWorld,"expected did not equal result");
+//        }
     }
 }

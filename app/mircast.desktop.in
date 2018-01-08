@@ -1,10 +1,12 @@
 [Desktop Entry]
 _Name=mircast
-Comment=My project description
+Comment=Cast the device screen in to a remote computer for capturing and demo purposes
 Exec=@EXEC@
 Icon=@ICON@
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true
+_Keywords=cast;screen;video;
+X-Ubuntu-Default-Department-ID=developer
 
 

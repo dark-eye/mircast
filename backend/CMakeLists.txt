@@ -5,11 +5,11 @@ include_directories(
 set(
     Mircastbackend_SRCS
     modules/Mircast/backend.cpp
-    modules/Mircast/mytype.cpp
+    modules/Mircast/launcher.cpp
 )
 
 # Make the unit test files visible on qtcreator
-add_custom_target(Mircastbackend_UNITTEST_QML_FILES ALL SOURCES "tests/unit/tst_mytype.qml")
+add_custom_target(Mircastbackend_UNITTEST_QML_FILES ALL SOURCES "tests/unit/tst_launcher.qml")
 
 add_library(Mircastbackend MODULE
     ${Mircastbackend_SRCS}

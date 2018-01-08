@@ -1,8 +1,11 @@
 {
     "policy_groups": [
         "networking",
-        "webview"
+        "webview",
+        "connectivity",
+        "content_exchange",
+        "content_exchange_source"
     ],
-    "policy_version": 1.3
+    "policy_version": 1.3,
+    "template": "unconfined"
 }
-

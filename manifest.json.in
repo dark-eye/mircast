@@ -1,16 +1,16 @@
 {
     "name": "@APP_ID@",
-    "description": "description of mircast",
+    "description": "Cast the device screen in to a remote computer for capturing and demo purposes",
     "architecture": "@CLICK_ARCH@",
     "title": "@APP_NAME@",
     "hooks": {
         "mircast": {
             "apparmor": "mircast.apparmor",
-            "desktop":  "mircast.desktop"
+            "content-hub": "mircast.json",
+            "desktop": "mircast.desktop"
         }
     },
     "version": "0.1",
     "maintainer": "Eran Uzan <etherpulse@gmail.com>",
-    "framework" : "ubuntu-sdk-15.04.6"
+    "framework": "ubuntu-sdk-15.04.6"
 }
-

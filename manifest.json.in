@@ -1,0 +1,16 @@
+{
+    "name": "@APP_ID@",
+    "description": "description of mircast",
+    "architecture": "@CLICK_ARCH@",
+    "title": "@APP_NAME@",
+    "hooks": {
+        "mircast": {
+            "apparmor": "mircast.apparmor",
+            "desktop":  "mircast.desktop"
+        }
+    },
+    "version": "0.1",
+    "maintainer": "Eran Uzan <etherpulse@gmail.com>",
+    "framework" : "ubuntu-sdk-15.04.6"
+}
+

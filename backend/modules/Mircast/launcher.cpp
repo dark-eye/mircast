@@ -2,7 +2,7 @@
 
 Launcher::Launcher(QObject *parent) :
     QObject(parent),
-    m_message("Runnig log:\n"),
+    m_message(""),
     m_port(12345),
     m_compression(9),
     m_process(new QProcess(this))

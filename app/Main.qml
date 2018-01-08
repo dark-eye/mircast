@@ -8,6 +8,7 @@ import Mircast 1.0
 */
 
 MainView {
+    id:mainView
     // objectName for functional testing purposes (autopilot-qt5)
     objectName: "mainView"
 
@@ -74,21 +75,20 @@ MainView {
                     placeholderText: i18n.tr("Remote port number")
                     text:"12345"
                 }
-
-                Label {
-                    id:compressionLabel
-                    text: i18n.tr("Compression") + " :"
-
-                }
-
-                Slider {
-                    id:compression
-                    width:parent.width/2 - (parent.spacing*2) - compressionLabel.width
-                    maximumValue: 9
-                    minimumValue: 1
-                    value: micastSettings.compression
-                    onValueChanged: {
-                        micastSettings.compression = launcher.compression = value;
+                Column {
+                    Label {
+                        id:compressionLabel
+                        text: i18n.tr("Compression") + " :"
+                    }
+                    Slider {
+                        id:compression
+                        width:connectionSettingssRow.width/2 - (connectionSettingssRow.spacing)
+                        maximumValue: 9
+                        minimumValue: 1
+                        value: micastSettings.compression
+                        onValueChanged: {
+                            micastSettings.compression = launcher.compression = value;
+                        }
                     }
                 }
             }
@@ -120,16 +120,26 @@ MainView {
                 }
             }
         }
+        Label {
+            anchors {
+                left:parent.left
+                right:parent.right
+                top:settingsColumn.bottom
+                margins: units.gu(1)
+            }
+            text: i18n.tr("Run the following on the hosting computer (%1) :").arg(remoteIp.text)
+        }
+
         TextArea {
             id:hostInstructions
             anchors {
                 left:parent.left
                 right:parent.right
                 top:settingsColumn.bottom
-                margins: units.gu(2)
+                margins: units.gu(4)
             }
             readOnly: true
-            text: i18n.tr("Run the following on the hosting computer (%1) :").arg(remoteIp.text)+ "\n\n" + getHostCommand();
+            text: getHostCommand();
 
             function getHostCommand() {
                 return "nc -l "+ portNumber.text +" | "
@@ -147,8 +157,7 @@ MainView {
             handler: ContentHandler.Share
 
             onPeerSelected: {
-                exportPeer.selectionType = ContentTransfer.Single
-                mainPage.activeTransfer = exportPeer.request()
+                exportPeer.selectionType = ContentTransfer.Single                
                 this.visible = false;
             }
         }
@@ -158,17 +167,18 @@ MainView {
             contentType: ContentType.Text
             handler: ContentHandler.Share
 
-            property Component picItem: ContentItem {}
+            property Component contentItem: ContentItem {}
 
             function exportText(text) {
                 var transfer = exportPeer.request()
-                transfer.items = [ text ]
+                transfer.items = [ contentItem.createObject(mainView, { "text": text })  ]
                 transfer.state = ContentTransfer.Charged
-                exportPicker.visible = true;
             }
         }
 
         Button {
+            visible:false
+            enabled:visible
             id:shareCommandButton
             objectName: "shareCommandButton"
             anchors {
@@ -179,10 +189,13 @@ MainView {
             width: parent.width
             height:units.gu(5)
             iconName: "share"
-            text: i18n.tr("Share Command Instructions")
+            text: exportPicker.visible ? i18n.tr("Abort Sharing") : i18n.tr("Share Command Instructions")
 
             onClicked: {
-               exportPeer.exportText();
+                if(!exportPicker.visible) {
+                  exportPeer.exportText(hostInstructions.getHostCommand());
+                }
+                exportPicker.visible = !exportPicker.visible;
             }
         }
 
@@ -210,8 +223,8 @@ MainView {
             }
             width: parent.width
             height:units.gu(5)
-
-            text: launcher.active ? i18n.tr("Stop Cast") :i18n.tr("Cast")
+            enabled: !launcher.active
+            text: launcher.active ? i18n.tr("Close the app to stop the cast") :i18n.tr("Cast")
 
             onClicked: {
                 if(launcher.active) {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-08 15:26+0000\n"
+"POT-Creation-Date: 2018-01-08 16:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../app/Main.qml:23
+#: ../app/Main.qml:24
 msgid "Mircast"
 msgstr ""
 
-#: ../app/Main.qml:66
+#: ../app/Main.qml:67
 msgid "Remote IP / hostname"
 msgstr ""
 
-#: ../app/Main.qml:74
+#: ../app/Main.qml:75
 msgid "Remote port number"
 msgstr ""
 
-#: ../app/Main.qml:80
+#: ../app/Main.qml:81
 msgid "Compression"
 msgstr ""
 
@@ -41,23 +41,31 @@ msgstr ""
 msgid "Height"
 msgstr ""
 
-#: ../app/Main.qml:132
+#: ../app/Main.qml:130
 #, qt-format
 msgid "Run the following on the hosting computer (%1) :"
 msgstr ""
 
-#: ../app/Main.qml:182
+#: ../app/Main.qml:192
+msgid "Abort Sharing"
+msgstr ""
+
+#: ../app/Main.qml:192
 msgid "Share Command Instructions"
 msgstr ""
 
-#: ../app/Main.qml:214
-msgid "Stop Cast"
+#: ../app/Main.qml:227
+msgid "Close the app to stop the cast"
 msgstr ""
 
-#: ../app/Main.qml:214
+#: ../app/Main.qml:227
 msgid "Cast"
 msgstr ""
 
-#: /home/eran/private/build-mircast-UbuntuSDK_for_desktop_GCC_amd64_ubuntu_sdk_15_04-Default/po/mircast.desktop.in.h:1
+#: /home/eran/private/build-mircast-UbuntuSDK_for_clickable_armhf_GCC_armhf_ubuntu_sdk_15_04-Release/po/mircast.desktop.in.h:1
 msgid "mircast"
+msgstr ""
+
+#: /home/eran/private/build-mircast-UbuntuSDK_for_clickable_armhf_GCC_armhf_ubuntu_sdk_15_04-Release/po/mircast.desktop.in.h:2
+msgid "cast;screen;video;"
 msgstr ""

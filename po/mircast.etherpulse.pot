@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-08 16:55+0000\n"
+"POT-Creation-Date: 2018-01-09 13:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,48 +17,48 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../app/Main.qml:24
+#: ../app/Main.qml:25
 msgid "Mircast"
 msgstr ""
 
-#: ../app/Main.qml:67
+#: ../app/Main.qml:81
 msgid "Remote IP / hostname"
 msgstr ""
 
-#: ../app/Main.qml:75
+#: ../app/Main.qml:89
 msgid "Remote port number"
 msgstr ""
 
-#: ../app/Main.qml:81
+#: ../app/Main.qml:95
 msgid "Compression"
 msgstr ""
 
-#: ../app/Main.qml:109
+#: ../app/Main.qml:123
 msgid "Width"
 msgstr ""
 
-#: ../app/Main.qml:118
+#: ../app/Main.qml:132
 msgid "Height"
 msgstr ""
 
-#: ../app/Main.qml:130
+#: ../app/Main.qml:144
 #, qt-format
 msgid "Run the following on the hosting computer (%1) :"
 msgstr ""
 
-#: ../app/Main.qml:192
+#: ../app/Main.qml:209
 msgid "Abort Sharing"
 msgstr ""
 
-#: ../app/Main.qml:192
+#: ../app/Main.qml:209
 msgid "Share Command Instructions"
 msgstr ""
 
-#: ../app/Main.qml:227
+#: ../app/Main.qml:244
 msgid "Close the app to stop the cast"
 msgstr ""
 
-#: ../app/Main.qml:227
+#: ../app/Main.qml:244
 msgid "Cast"
 msgstr ""
 

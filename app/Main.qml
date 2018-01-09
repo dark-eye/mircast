@@ -1,4 +1,5 @@
 import QtQuick 2.4
+import QtQuick.Window 2.2
 import Ubuntu.Components 1.3
 import Ubuntu.Content 1.3
 import Qt.labs.settings 1.0
@@ -22,23 +23,36 @@ MainView {
         header: PageHeader {
             id: pageHeader
             title: i18n.tr("Mircast")
-            StyleHints {
-                foregroundColor: theme.palette.normal.foreground
-                backgroundColor: theme.palette.normal.background
-            }
+            leadingActionBar.actions : [
+                Action{
+                    iconSource: "graphics/mircast.png"
+                }
+            ]
         }
 
         Settings {
-            id:micastSettings
+            id:mircastSettings
             property var remoteIP: ""
             property var screenWidth: ""
             property var screenHeight: ""
-            property var compression: 9
+            property var compression: 7
         }
+
+        onFocusChanged: {
+            if(!screenHeight.text) {
+                screenHeight.text = Screen.height/ 2;
+            }
+            if(!screenWidth.text) {
+                screenWidth.text = Screen.width / 2;
+            }
+        }
+
 
         Launcher {
             id: launcher
         }
+
+
         Column {
             id:settingsColumn
             enabled:!launcher.active
@@ -65,7 +79,7 @@ MainView {
                     width:parent.width/2 - parent.spacing
                     objectName: "remoteIp"
                     placeholderText: i18n.tr("Remote IP / hostname")
-                    text:micastSettings.remoteIP
+                    text:mircastSettings.remoteIP
                 }
 
                 TextField {
@@ -73,7 +87,7 @@ MainView {
                     visible:false
                     objectName: "portNumber"
                     placeholderText: i18n.tr("Remote port number")
-                    text:"12345"
+                    text:"12345"                    
                 }
                 Column {
                     Label {
@@ -85,10 +99,10 @@ MainView {
                         width:connectionSettingssRow.width/2 - (connectionSettingssRow.spacing)
                         maximumValue: 9
                         minimumValue: 1
-                        value: micastSettings.compression
+                        value: mircastSettings.compression
                         onValueChanged: {
-                            micastSettings.compression = launcher.compression = value;
-                        }
+                            mircastSettings.compression = launcher.compression = value;
+                        }                        
                     }
                 }
             }
@@ -107,7 +121,7 @@ MainView {
                     width:parent.width/2 - parent.spacing
                     objectName: "screenWidth"
                     placeholderText: i18n.tr("Width")
-                    text:micastSettings.screenWidth
+                    text:mircastSettings.screenWidth
 
                 }
 
@@ -116,7 +130,7 @@ MainView {
                     width:parent.width/2- parent.spacing
                     objectName: "screenHeight"
                     placeholderText: i18n.tr("Height")
-                    text:micastSettings.screenHeight
+                    text:mircastSettings.screenHeight
                 }
             }
         }
@@ -139,6 +153,10 @@ MainView {
                 margins: units.gu(4)
             }
             readOnly: true
+            onCursorPositionChanged: {
+                selectAll();
+            }
+
             text: getHostCommand();
 
             function getHostCommand() {
@@ -175,7 +193,6 @@ MainView {
                 transfer.state = ContentTransfer.Charged
             }
         }
-
         Button {
             visible:false
             enabled:visible
@@ -230,9 +247,9 @@ MainView {
                 if(launcher.active) {
                     launcher.stop();
                 } else {
-                    micastSettings.remoteIP = launcher.remoteIP = remoteIp.text;
-                    micastSettings.screenWidth = launcher.width = screenWidth.text;
-                    micastSettings.screenHeight = launcher.height = screenHeight.text;
+                    mircastSettings.remoteIP = launcher.remoteIP = remoteIp.text;
+                    mircastSettings.screenWidth = launcher.width = screenWidth.text;
+                    mircastSettings.screenHeight = launcher.height = screenHeight.text;
                     launcher.launch();
                 }
             }

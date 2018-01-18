@@ -17,7 +17,8 @@ class Launcher : public QObject
 
 public:
     explicit Launcher(QObject *parent = 0);
-    Q_INVOKABLE bool launch();
+    Q_INVOKABLE bool cast();
+    Q_INVOKABLE bool host();
     Q_INVOKABLE bool stop();
     Q_INVOKABLE QString getCommandOutput();
     ~Launcher();
@@ -31,6 +32,7 @@ public slots:
     void updateOutputMsg();
 
 protected:
+    bool launch(QString command);
     QString output() { return m_message; }
     QString remoteIP() { return m_remoteIP; }
     void setRemoteIP(QString ip) { m_remoteIP = ip; }

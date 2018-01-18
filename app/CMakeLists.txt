@@ -16,3 +16,5 @@ add_custom_target(mircast_AutopilotFiles ALL SOURCES ${AUTOPILOT_TEST_FILES})
 # Make the unit test files visible in qtcreator
 file(GLOB_RECURSE UNIT_TEST_FILES tests/unit/*.qml)
 add_custom_target(mircast_UnitTestFiles ALL SOURCES ${UNIT_TEST_FILES})
+
+add_subdirectory(components)

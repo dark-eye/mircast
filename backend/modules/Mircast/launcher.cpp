@@ -52,7 +52,7 @@ bool Launcher::isActive() {
     return m_active;
 }
 
-bool Launcher::launch()
+bool Launcher::cast()
 {
     QString command = QString("bash -mvlc \"mirscreencast -m /run/mir_socket --stdout --cap-interval 1 -s %1 %2 | gzip -%3 -c | nc %4 %5 ;\"")
                         .arg(m_width)
@@ -60,6 +60,22 @@ bool Launcher::launch()
                         .arg(m_compression)
                         .arg(m_remoteIP)
                         .arg(m_port);
+
+  return this->launch(command);
+}
+
+bool Launcher::host()
+{
+    QString command = QString("bash -mvlc \"nc -l %3 | gzip -dc | mplayer -demuxer rawvideo -rawvideo fps=12:w=%1:h=%2:format=rgba -\"")
+                        .arg(m_width)
+                        .arg(m_height)
+                        .arg(m_port);
+
+   return this->launch(command);
+}
+
+bool Launcher::launch(QString command)
+{
      m_process->start(command);
      m_process->waitForStarted(10000);
      return  this->isActive();

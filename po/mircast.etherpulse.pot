@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-09 13:51+0000\n"
+"POT-Creation-Date: 2018-01-18 13:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,49 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../app/Main.qml:25
+#: ../app/components/Device.qml:9 ../app/components/Host.qml:9
 msgid "Mircast"
 msgstr ""
 
-#: ../app/Main.qml:81
+#: ../app/components/Device.qml:51
 msgid "Remote IP / hostname"
 msgstr ""
 
-#: ../app/Main.qml:89
+#: ../app/components/Device.qml:59
 msgid "Remote port number"
 msgstr ""
 
-#: ../app/Main.qml:95
+#: ../app/components/Device.qml:65
 msgid "Compression"
 msgstr ""
 
-#: ../app/Main.qml:123
+#: ../app/components/Device.qml:93
 msgid "Width"
 msgstr ""
 
-#: ../app/Main.qml:132
+#: ../app/components/Device.qml:102
 msgid "Height"
 msgstr ""
 
-#: ../app/Main.qml:144
+#: ../app/components/Device.qml:147
+msgid "Close the app to stop the cast"
+msgstr ""
+
+#: ../app/components/Device.qml:147
+msgid "Cast"
+msgstr ""
+
+#: ../app/components/DeviceInstructions.qml:23
 #, qt-format
 msgid "Run the following on the hosting computer (%1) :"
 msgstr ""
 
-#: ../app/Main.qml:209
+#: ../app/components/DeviceInstructions.qml:61
 msgid "Abort Sharing"
 msgstr ""
 
-#: ../app/Main.qml:209
+#: ../app/components/DeviceInstructions.qml:61
 msgid "Share Command Instructions"
 msgstr ""
 
-#: ../app/Main.qml:244
-msgid "Close the app to stop the cast"
+#: ../app/components/Host.qml:28
+msgid "Stop Hosting"
 msgstr ""
 
-#: ../app/Main.qml:244
-msgid "Cast"
+#: ../app/components/Host.qml:28
+msgid "Wait for cast"
+msgstr ""
+
+#: ../app/components/Information.qml:61
+msgid "Get the source"
+msgstr ""
+
+#: ../app/components/Information.qml:62
+msgid "Report issues"
+msgstr ""
+
+#: ../app/components/Information.qml:71
+msgid "About"
 msgstr ""
 
 #: /home/eran/private/build-mircast-UbuntuSDK_for_clickable_armhf_GCC_armhf_ubuntu_sdk_15_04-Release/po/mircast.desktop.in.h:1

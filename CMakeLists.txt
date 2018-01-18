@@ -24,7 +24,7 @@ set(QT_IMPORTS_DIR "lib/${ARCH_TRIPLET}")
 
 option(INSTALL_TESTS "Install the tests on make install" on)
 
-set(APP_NAME          mircast)
+set(APP_NAME          Mircast)
 set(APP_ID            "mircast.etherpulse")
 set(MIRCAST_DIR "share/qml/mircast")
 set(MAIN_QML          "Main.qml")

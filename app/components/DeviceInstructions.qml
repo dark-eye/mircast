@@ -15,6 +15,7 @@ Item {
             }
             spacing: units.gu(1)
             Label {
+                id:instructionsLabel
                 anchors {
                     left:parent.left
                     right:parent.right
@@ -26,8 +27,9 @@ Item {
             TextArea {
                 id:deviceInstructions
                 anchors {
+//                     top:instructionsLabel.bottom
                     left:parent.left
-                    right:parent.right
+                    right:copyCommandButton.left
                     margins: units.gu(4)
                 }
                 readOnly: true
@@ -39,7 +41,8 @@ Item {
 
                 function getHostCommand() {
                     return "nc -l "+ portNumber.text +" | "
-                            +"gzip -dc | mplayer -demuxer rawvideo -rawvideo fps=12"
+                            +(compression.value ? "gzip -dc | " : "")
+							+"mplayer -demuxer rawvideo -rawvideo fps=15"
                             +":w="+screenWidth.text
                             +":h="+screenHeight.text
                             +":format=rgba -";
@@ -49,13 +52,33 @@ Item {
             Button {
                 visible:true
                 enabled:visible
+                id:copyCommandButton
+                objectName: "copyCommandButton"
+                anchors {
+//                     verticalCenter: deviceInstructions.verticalCenter
+                    right:parent.right
+                    margins: units.gu(5)
+                }
+                width: units.gu(5)
+                height:units.gu(5)
+                iconName: "edit-copy"
+                //text:i18n.tr("Copy Command Instructions")
+
+                onClicked: {
+                    Clipboard.push(deviceInstructions.text)
+                }
+            }
+            Button {
+                visible:true
+                enabled:visible
                 id:shareCommandButton
                 objectName: "shareCommandButton"
                 anchors {
+//                     top:deviceInstructions.bottom
                     horizontalCenter: parent.horizontalCenter
                     margins: units.gu(2)
                 }
-                width: parent.width
+                width: parent.width 
                 height:units.gu(5)
                 iconName: "share"
                 text: exportPicker.visible ? i18n.tr("Abort Sharing") : i18n.tr("Share Command Instructions")
@@ -67,7 +90,7 @@ Item {
                     exportPicker.visible = !exportPicker.visible;
                 }
             }
+
         }
 
 }
- 

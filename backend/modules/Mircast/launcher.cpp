@@ -54,10 +54,10 @@ bool Launcher::isActive() {
 
 bool Launcher::cast()
 {
-    QString command = QString("bash -mvlc \"mirscreencast -m /run/mir_socket --stdout --cap-interval 1 -s %1 %2 | gzip -%3 -c | nc %4 %5 ;\"")
+    QString command = QString("bash -mvlc \"mirscreencast -m /run/mir_socket --stdout --cap-interval 2 -s %1 %2 | %3 nc %4 %5 ;\"")
                         .arg(m_width)
                         .arg(m_height)
-                        .arg(m_compression)
+                        .arg(m_compression > 0 ? QString("gzip -%1 -c |").arg(m_compression) : "")
                         .arg(m_remoteIP)
                         .arg(m_port);
 

@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the  package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 13:54+0000\n"
+"POT-Creation-Date: 2019-04-15 07:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,56 +17,60 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../app/components/Device.qml:9 ../app/components/Host.qml:9
-msgid "Mircast"
-msgstr ""
-
-#: ../app/components/Device.qml:51
+#: ../app/components/Device.qml:48
 msgid "Remote IP / hostname"
 msgstr ""
 
-#: ../app/components/Device.qml:59
+#: ../app/components/Device.qml:56 ../app/components/Host.qml:37
 msgid "Remote port number"
 msgstr ""
 
-#: ../app/components/Device.qml:65
+#: ../app/components/Device.qml:62
 msgid "Compression"
 msgstr ""
 
-#: ../app/components/Device.qml:93
-msgid "Width"
+#: ../app/components/Device.qml:90
+msgid "Enter Width or leave empty for default width"
 msgstr ""
 
-#: ../app/components/Device.qml:102
-msgid "Height"
+#: ../app/components/Device.qml:104
+msgid "Enter height or leave empty for default height"
 msgstr ""
 
-#: ../app/components/Device.qml:147
+#: ../app/components/Device.qml:156
 msgid "Close the app to stop the cast"
 msgstr ""
 
-#: ../app/components/Device.qml:147
+#: ../app/components/Device.qml:156 ../app/components/MiracastHeader.qml:46
 msgid "Cast"
 msgstr ""
 
-#: ../app/components/DeviceInstructions.qml:23
+#: ../app/components/DeviceInstructions.qml:24
 #, qt-format
 msgid "Run the following on the hosting computer (%1) :"
 msgstr ""
 
-#: ../app/components/DeviceInstructions.qml:61
+#: ../app/components/DeviceInstructions.qml:84
 msgid "Abort Sharing"
 msgstr ""
 
-#: ../app/components/DeviceInstructions.qml:61
+#: ../app/components/DeviceInstructions.qml:84
 msgid "Share Command Instructions"
 msgstr ""
 
-#: ../app/components/Host.qml:28
+#: ../app/components/Host.qml:75
+msgid "Override Width"
+msgstr ""
+
+#: ../app/components/Host.qml:91
+msgid "Override Height"
+msgstr ""
+
+#: ../app/components/Host.qml:107
 msgid "Stop Hosting"
 msgstr ""
 
-#: ../app/components/Host.qml:28
+#: ../app/components/Host.qml:107
 msgid "Wait for cast"
 msgstr ""
 
@@ -82,10 +86,18 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: /home/eran/private/build-mircast-UbuntuSDK_for_clickable_armhf_GCC_armhf_ubuntu_sdk_15_04-Release/po/mircast.desktop.in.h:1
+#: ../app/components/MiracastHeader.qml:29
+msgid "Mircast"
+msgstr ""
+
+#: ../app/components/MiracastHeader.qml:51
+msgid "Host"
+msgstr ""
+
+#: /mnt/old/home/eran/oss/mircast/build/po/mircast.desktop.in.h:1
 msgid "mircast"
 msgstr ""
 
-#: /home/eran/private/build-mircast-UbuntuSDK_for_clickable_armhf_GCC_armhf_ubuntu_sdk_15_04-Release/po/mircast.desktop.in.h:2
+#: /mnt/old/home/eran/oss/mircast/build/po/mircast.desktop.in.h:2
 msgid "cast;screen;video;"
 msgstr ""

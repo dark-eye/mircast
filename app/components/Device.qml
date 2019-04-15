@@ -2,16 +2,13 @@ import QtQuick 2.4
 import QtQuick.Window 2.2
 import Ubuntu.Components 1.3
 
-Page {
+Item {
 
-    header: PageHeader {
-        id: pageHeader
-        title: i18n.tr("Mircast")
-        leadingActionBar.actions : [
-            Action{
-                iconSource: "../graphics/mircast.png"
-            }
-        ]
+     anchors {
+        top: parent.top
+        left:parent.left
+        right:parent.right
+        bottom:parent.bottom
     }
 
     onFocusChanged: {
@@ -27,7 +24,7 @@ Page {
         id:settingsColumn
         enabled:!launcher.active
         anchors {
-            top: pageHeader.bottom
+            top: parent.top
             left:parent.left
             right:parent.right
             topMargin: units.gu(5)
@@ -68,9 +65,9 @@ Page {
                     id:compression
                     width:connectionSettingssRow.width/2 - (connectionSettingssRow.spacing)
                     maximumValue: 9
-                    minimumValue: 1
+                    minimumValue: 0
                     value: mircastSettings.compression
-                    onValueChanged: {
+                    onValueChanged: if(mircastSettings.compression != value){
                         mircastSettings.compression = launcher.compression = value;
                     }
                 }
@@ -90,17 +87,28 @@ Page {
                 id: screenWidth
                 width:parent.width/2 - parent.spacing
                 objectName: "screenWidth"
-                placeholderText: i18n.tr("Width")
+                placeholderText: i18n.tr("Enter Width or leave empty for default width")
                 text:mircastSettings.screenWidth
-
+				onFocusChanged: {
+                    if(!screenWidth.text) {
+                        screenWidth.text = Screen.width / 2;
+                    }
+                }
+                onTextChanged : mircastSettings.screenWidth =screenWidth.text;
             }
 
             TextField {
                 id: screenHeight
                 width:parent.width/2- parent.spacing
                 objectName: "screenHeight"
-                placeholderText: i18n.tr("Height")
+                placeholderText: i18n.tr("Enter height or leave empty for default height")
                 text:mircastSettings.screenHeight
+                 onFocusChanged: {
+                    if(!screenHeight.text) {
+                        screenHeight.text = Screen.height/ 2;
+                    }
+                }
+                onTextChanged : mircastSettings.screenHeight =screenHeight.text;
             }
         }
     }
@@ -144,6 +152,7 @@ Page {
         width: parent.width
         height:units.gu(5)
         enabled: !launcher.active
+        color: !launcher.active ? theme.palette.normal.positive : theme.palette.disabled.negative
         text: launcher.active ? i18n.tr("Close the app to stop the cast") :i18n.tr("Cast")
 
         onClicked: {
@@ -151,8 +160,8 @@ Page {
                 launcher.stop();
             } else {
                 mircastSettings.remoteIP = launcher.remoteIP = remoteIp.text;
-                mircastSettings.screenWidth = launcher.width = screenWidth.text;
-                mircastSettings.screenHeight = launcher.height = screenHeight.text;
+                launcher.width = mircastSettings.screenWidth;
+                launcher.height = mircastSettings.screenHeight;
                 launcher.cast();
             }
         }

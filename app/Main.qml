@@ -4,6 +4,8 @@ import Ubuntu.Components 1.3
 import Ubuntu.Content 1.3
 import Qt.labs.settings 1.0
 import Mircast 1.0
+
+import "components"
 /*!
     \brief MainView with a Label and Button elements.
 */
@@ -19,16 +21,12 @@ MainView {
     width: units.gu(100)
     height: units.gu(75)
 
-    PageStack {
-        id:mainPageStack
-    }
 
-    Component.onCompleted: mainPageStack.push(Qt.resolvedUrl("components/Device.qml"))
     Settings {
         id:mircastSettings
         property var remoteIP: ""
-        property var screenWidth: ""
-        property var screenHeight: ""
+        property var screenWidth: Screen.width / 2
+        property var screenHeight: Screen.height / 2
         property var compression: 7
     }
 
@@ -36,6 +34,10 @@ MainView {
         id: launcher
     }
 
+
+    BasePage {
+        id:mainPage
+    }
 
     ContentPeerPicker {
         id:exportPicker

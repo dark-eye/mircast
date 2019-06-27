@@ -23,7 +23,7 @@ class BaseTestCase(AutopilotTestCase):
 
     local_location = os.path.dirname(os.path.dirname(os.getcwd()))
     local_location_qml = os.path.join(local_location, 'Main.qml')
-    click_package = '{0}.{1}'.format('mircast', 'etherpulse')
+    click_package = '{0}.{1}'.format('mircast', 'darkeye')
 
     def setUp(self):
         super(BaseTestCase, self).setUp()

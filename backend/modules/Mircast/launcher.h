@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QProcess>
+#include <QFileInfo>
 
 class Launcher : public QObject
 {
@@ -14,6 +15,8 @@ class Launcher : public QObject
     Q_PROPERTY( uint port READ port WRITE setPort)
     Q_PROPERTY( ushort compression READ compression WRITE setCompression )
     Q_PROPERTY( bool active READ isActive NOTIFY activeChanged )
+	Q_PROPERTY( bool canHost READ canHost NOTIFY abilityChanged )
+	Q_PROPERTY( bool canCast READ canCast NOTIFY abilityChanged )
 
 public:
     explicit Launcher(QObject *parent = 0);
@@ -21,15 +24,20 @@ public:
     Q_INVOKABLE bool host();
     Q_INVOKABLE bool stop();
     Q_INVOKABLE QString getCommandOutput();
+	Q_INVOKABLE QString getCastCommand();
+	Q_INVOKABLE QString getHostCommand();
     ~Launcher();
 
 Q_SIGNALS:
     void outputChanged();
     void activeChanged();
+	void abilityChanged();
 
 public slots:
     void updateActive();
     void updateOutputMsg();
+	void commandChanged();
+
 
 protected:
     bool launch(QString command);
@@ -46,6 +54,8 @@ protected:
     void setCompression(uint port) { m_compression = port; }
 
     bool isActive();
+	bool canHost();
+	bool canCast();
 
 
     QString m_message;

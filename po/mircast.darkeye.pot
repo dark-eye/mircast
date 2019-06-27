@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 07:22+0000\n"
+"POT-Creation-Date: 2019-06-27 12:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,61 +17,73 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../app/components/Device.qml:48
+#: ../app/components/Device.qml:52
 msgid "Remote IP / hostname"
 msgstr ""
 
-#: ../app/components/Device.qml:56 ../app/components/Host.qml:37
+#: ../app/components/Device.qml:60 ../app/components/Host.qml:52
 msgid "Remote port number"
 msgstr ""
 
-#: ../app/components/Device.qml:62
+#: ../app/components/Device.qml:66 ../app/components/Host.qml:58
 msgid "Compression"
 msgstr ""
 
-#: ../app/components/Device.qml:90
+#: ../app/components/Device.qml:94
 msgid "Enter Width or leave empty for default width"
 msgstr ""
 
-#: ../app/components/Device.qml:104
+#: ../app/components/Device.qml:108
 msgid "Enter height or leave empty for default height"
 msgstr ""
 
-#: ../app/components/Device.qml:156
+#: ../app/components/Device.qml:170
 msgid "Close the app to stop the cast"
 msgstr ""
 
-#: ../app/components/Device.qml:156 ../app/components/MiracastHeader.qml:46
+#: ../app/components/Device.qml:170 ../app/components/MiracastHeader.qml:46
 msgid "Cast"
 msgstr ""
 
-#: ../app/components/DeviceInstructions.qml:24
+#: ../app/components/DeviceInstructions.qml:29
 #, qt-format
 msgid "Run the following on the hosting computer (%1) :"
 msgstr ""
 
-#: ../app/components/DeviceInstructions.qml:84
+#: ../app/components/DeviceInstructions.qml:76
+msgid "Copy Command Instructions"
+msgstr ""
+
+#: ../app/components/DeviceInstructions.qml:95
 msgid "Abort Sharing"
 msgstr ""
 
-#: ../app/components/DeviceInstructions.qml:84
+#: ../app/components/DeviceInstructions.qml:95
 msgid "Share Command Instructions"
 msgstr ""
 
-#: ../app/components/Host.qml:75
+#: ../app/components/Host.qml:35
+msgid "Auto Configure"
+msgstr ""
+
+#: ../app/components/Host.qml:85
 msgid "Override Width"
 msgstr ""
 
-#: ../app/components/Host.qml:91
+#: ../app/components/Host.qml:101
 msgid "Override Height"
 msgstr ""
 
-#: ../app/components/Host.qml:107
+#: ../app/components/Host.qml:118
 msgid "Stop Hosting"
 msgstr ""
 
-#: ../app/components/Host.qml:107
+#: ../app/components/Host.qml:118
 msgid "Wait for cast"
+msgstr ""
+
+#: ../app/components/Host.qml:141
+msgid "Action unavailable for now"
 msgstr ""
 
 #: ../app/components/Information.qml:61
@@ -90,8 +102,12 @@ msgstr ""
 msgid "Mircast"
 msgstr ""
 
-#: ../app/components/MiracastHeader.qml:51
+#: ../app/components/MiracastHeader.qml:53
 msgid "Host"
+msgstr ""
+
+#: ../app/components/Unavailable.qml:43
+msgid "Action Unavailable"
 msgstr ""
 
 #: /mnt/old/home/eran/oss/mircast/build/po/mircast.desktop.in.h:1

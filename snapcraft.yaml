@@ -1,0 +1,16 @@
+name: test-miracast-desktop
+version: 0.1
+summary: Cast your Mir display
+description: |
+  Cast the device screen in to a remote computer for capturing and demo purposes
+confinement: devmode
+base: core18
+
+parts:
+  test-miracast-desktop:
+    plugin: dump
+    source: build/tmp/
+
+apps:
+  test-miracast-desktop:
+    command: qmlscene share/qml/mircast/Main.qml

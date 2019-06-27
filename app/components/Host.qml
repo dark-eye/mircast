@@ -1,13 +1,17 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 
-Item {
+Flickable {
+	id:hostPage
+
      anchors {
         top: parent.top
         left:parent.left
         right:parent.right
         bottom:parent.bottom
     }
+    enabled: launcher.canHost
+    interactive:true
 
     Column {
         id:settingsColumn
@@ -23,10 +27,12 @@ Item {
 
                 CheckBox {
                     id:autoconfig
+                    enabled: true //TODO add check against negosiator state
                     checked: mircastSettings.autoHostConfig
-                    onValueChanged: {
+                    onCheckedChanged: {
                         mircastSettings.autoHostConfig = checked;
                     }
+                    text:i18n.tr("Auto Configure")
                 }
 
         Row {
@@ -37,28 +43,23 @@ Item {
             }
             width:parent.width
             spacing: units.gu(3)
-			enabled: !mircastSettings.autoHostConfig
+            enabled: !mircastSettings.autoHostConfig
 
-            TextField {
-                id: portNumber
-                visible:false
-                objectName: "portNumber"
-                placeholderText: i18n.tr("Remote port number")
-                text:"12345"
-            }
-//             Column {
-//                 Label {
-//                     id:compressionLabel
-//                     text: i18n.tr("Compression") + ":"
-//                 }
-//                 CheckBox {
-//                     id:compression
-//                     checked: mircastSettings.compression != 0
-//                     onValueChanged: {
-//                         mircastSettings.compression = launcher.compression = checked;
-//                     }
-//                 }
-//             }
+			TextField {
+				id: portNumber
+				visible:true
+				objectName: "portNumber"
+				placeholderText: i18n.tr("Remote port number")
+				text:"12345"
+			}
+			CheckBox {
+				id:compression
+				checked: mircastSettings.compression != 0
+				text:i18n.tr("Compression")
+				onCheckedChanged: {
+					mircastSettings.compression = launcher.compression = checked ? 9 : 0;
+				}
+			}
         }
         Row {
             id:screenSettingsRow
@@ -113,6 +114,7 @@ Item {
         width: parent.width
         height:units.gu(5)
         enabled: !launcher.active
+        color: !launcher.active ? theme.palette.normal.positive : theme.palette.disabled.negative
         text: launcher.active ? i18n.tr("Stop Hosting") :i18n.tr("Wait for cast")
 
         onClicked: {
@@ -125,6 +127,20 @@ Item {
             }
         }
     }
+
+    onEnabledChanged: {
+		if( !enabled ) {
+			unavailableComponent.createObject(hostPage,{z:100});
+		}
+	}
+
+	Component {
+		id:unavailableComponent
+		Unavailable {
+			anchors.fill:parent
+			label.text:i18n.tr("Action unavailable for now")
+		}
+	}
 
 }
 

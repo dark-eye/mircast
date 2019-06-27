@@ -22,7 +22,7 @@ import Ubuntu.Components 1.3
 
 Page {
 	id:_basePage
-	
+
      header: MiracastHeader {
 		id:pageHeader
 	}

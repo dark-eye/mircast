@@ -1,6 +1,6 @@
 /*
  * <one line to give the program's name and a brief idea of what it does.>
- * Copyright (C) 2018  eran <email>
+ * Copyright (C) 2019  eran <email>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,44 +17,38 @@
  */
 
 import QtQuick 2.4
-import QtQuick.Window 2.2
+import QtGraphicalEffects 1.0
+
 import Ubuntu.Components 1.3
 
 
-PageHeader {
-	
-	signal switchToCast();
-	signal switchToHost();
-	
-    title: i18n.tr("Mircast")
-	leadingActionBar.actions : [
-		Action {
-			enabled:false
-			iconSource: "../graphics/mircast.png"
-		}
-	]
-	extension: Sections {
+Item {
 
-        anchors {
-            left: parent.left
-            leftMargin: units.gu(2)
-            bottom: parent.bottom
-        }
-		actions: [
-			Action {
-				iconName: "external-link"
-				text: i18n.tr("Cast")
-				onTriggered: switchToCast();
-// 				enabled: launcher.canCast
-				visible: enabled
-			},
-			Action {
-				iconName: "import"
-				text: i18n.tr("Host")
-				onTriggered: switchToHost();
-// 				enabled: launcher.canHost
-				visible: enabled
-			}
-		]
+	property alias label:centerLabel
+	property alias background:backgroundFill
+
+	anchors.fill:parent
+
+	Rectangle {
+		id:backgroundFill
+		anchors.fill:parent
+		opacity:0.75
+		color: theme.palette.disabled.background
 	}
+	Label {
+		id:centerLabel
+		anchors {
+			centerIn:parent
+		}
+		text: i18n.tr("Action Unavailable")
+		textSize:Label.Large
+		color:theme.palette.disabled.backgroundTertiaryText
+		layer.enabled:true
+		layer.effect:DropShadow {
+			radius:3.0
+			horizontalOffset: -3
+			verticalOffset: -3
+		}
+	}
+    
 }

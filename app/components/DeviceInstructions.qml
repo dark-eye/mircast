@@ -1,5 +1,6 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
+import Ubuntu.Content 1.3
 
 Item {
     anchors {
@@ -8,11 +9,15 @@ Item {
         margins: units.gu(1)
     }
 
+    height:childrenRect.height
 
         Column {
             anchors {
-              fill: parent
+              top:parent.top
+              left:parent.left
+              right:parent.right
             }
+            height:childrenRect.height
             spacing: units.gu(1)
             Label {
                 id:instructionsLabel
@@ -27,28 +32,34 @@ Item {
             TextArea {
                 id:deviceInstructions
                 anchors {
-//                     top:instructionsLabel.bottom
                     left:parent.left
                     right:copyCommandButton.left
-                    margins: units.gu(4)
+                    margins: units.gu(1)
                 }
+
+				text: launcher.getHostCommand();
                 readOnly: true
+				 LayoutMirroring.enabled: false
                 onCursorPositionChanged: {
                     selectAll();
                 }
 
-                text: getHostCommand();
 
-                function getHostCommand() {
-                    return "nc -l "+ portNumber.text +" | "
-                            +(compression.value ? "gzip -dc | " : "")
-							+"mplayer -demuxer rawvideo -rawvideo fps=15"
-                            +":w="+screenWidth.text
-                            +":h="+screenHeight.text
-                            +":format=rgba -";
-
-                }
+				Timer {
+					interval:1000
+					running:true
+					repeat:true
+					onTriggered: {
+						deviceInstructions.text = launcher.getHostCommand();
+					}
+				}
+				MouseArea {
+					anchors.fill:parent
+					onPressAndHold:deviceInstructions.selectAll();
+				}
             }
+
+
             Button {
                 visible:true
                 enabled:visible
@@ -62,7 +73,7 @@ Item {
                 width: units.gu(5)
                 height:units.gu(5)
                 iconName: "edit-copy"
-                //text:i18n.tr("Copy Command Instructions")
+                text:i18n.tr("Copy Command Instructions")
 
                 onClicked: {
                     Clipboard.push(deviceInstructions.text)
@@ -85,11 +96,19 @@ Item {
 
                 onClicked: {
                     if(!exportPicker.visible) {
-                      exportPeer.exportText(hostInstructions.getHostCommand());
+                      exportPeer.exportText(launcher.getHostCommand());
                     }
                     exportPicker.visible = !exportPicker.visible;
                 }
             }
+            Connections {
+				target:exportPicker
+				onPeerSelected: {
+					var transfer = exportPicker.peer.request()
+					transfer.items = [ exportPeer.contentItem.createObject(mainView, { "text": launcher.getHostCommand() })  ]
+					transfer.state = ContentTransfer.Charged
+				}
+			}
 
         }
 

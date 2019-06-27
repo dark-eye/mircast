@@ -30,7 +30,8 @@ class negotiator : public QObject
     Q_PROPERTY(int orientation READ orientation WRITE setOrientation NOTIFY orientationChanged)
     Q_PROPERTY(int fps READ fps WRITE setFps NOTIFY fpsChanged)
     Q_PROPERTY(QPoint resolution READ resolution WRITE setResolution NOTIFY resolutionChanged)
-
+	Q_PROPERTY(QPoint compression READ compression WRITE setCompression NOTIFY compressionChanged)
+	Q_PROPERTY(QPoint remoteAddress READ remoteIP WRITE setRemoteIP)
 
 public:
     /**
@@ -57,17 +58,17 @@ public:
     /**
      * @return the orientation
      */
-    orientation() const;
+    orientation() const {return m_orientation;};
 
     /**
      * @return the fps
      */
-    int fps() const;
+    int fps() const {return m_fps;};
 
     /**
      * @return the resolution
      */
-    QPoint resolution() const;
+    QPoint resolution() const {return m_resolution;};
 
 	/**
 	 *
@@ -121,9 +122,11 @@ protected:
     virtual void childEvent(QChildEvent* event);
 
 private:
-    m_orientation;
+    int m_orientation;
     int m_fps;
     QPoint m_resolution;
+	short m_compression;
+	uint m_remoteIP;
 };
 
 #endif // NEGOTIATOR_H

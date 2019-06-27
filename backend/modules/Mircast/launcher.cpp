@@ -1,5 +1,6 @@
 #include "launcher.h"
 
+
 Launcher::Launcher(QObject *parent) :
     QObject(parent),
     m_message(""),
@@ -11,6 +12,7 @@ Launcher::Launcher(QObject *parent) :
     connect(m_process,SIGNAL(stateChanged(QProcess::ProcessState)), this,SLOT(updateActive()) );
     connect(m_process,SIGNAL(readyReadStandardOutput()), this,SLOT(updateOutputMsg()) );
     connect(m_process,SIGNAL(readyReadStandardError()), this,SLOT(updateOutputMsg()) );
+	Q_EMIT abilityChanged();
 }
 
 Launcher::~Launcher() {
@@ -21,7 +23,10 @@ void Launcher::updateOutputMsg() {
     if(m_process->state() == QProcess::Running) {
         QByteArray bytes = m_process->readAllStandardOutput();
         QString output = QString::fromLocal8Bit(bytes);
-        m_message += output;
+        m_message += output + "\n";
+		bytes = m_process->readAllStandardError();
+        QString errors = QString::fromLocal8Bit(bytes);
+        m_message += errors + "\n";
         Q_EMIT outputChanged();
     }
 }
@@ -52,24 +57,56 @@ bool Launcher::isActive() {
     return m_active;
 }
 
-bool Launcher::cast()
+bool Launcher::canHost() {
+    QFileInfo mplayer("/usr/bin/mplayer");
+	QFileInfo bash("/bin/bash");
+	QFileInfo gzip("/bin/gzip");
+	QFileInfo nc("/bin/nc");
+
+	return bash.exists() && mplayer.exists() && gzip.exists() && nc.exists();
+}
+
+bool Launcher::canCast() {
+    QFileInfo mirscreencast("/usr/bin/mirscreencast");
+	QFileInfo bash("/bin/bash");
+	QFileInfo gzip("/bin/gzip");
+	QFileInfo nc("/bin/nc");
+
+	return  bash.exists() && mirscreencast.exists() && gzip.exists() && nc.exists();
+}
+
+
+QString Launcher::getCastCommand()
 {
-    QString command = QString("bash -mvlc \"mirscreencast -m /run/mir_socket --stdout --cap-interval 2 -s %1 %2 | %3 nc %4 %5 ;\"")
+	 return QString("bash -mvlc \"mirscreencast -m /run/mir_socket --stdout --cap-interval 3 -s %1 %2 | %3 nc %4 %5 ;\"")
                         .arg(m_width)
                         .arg(m_height)
                         .arg(m_compression > 0 ? QString("gzip -%1 -c |").arg(m_compression) : "")
                         .arg(m_remoteIP)
                         .arg(m_port);
+}
+
+bool Launcher::cast()
+{
+    QString command = this->getCastCommand();
 
   return this->launch(command);
 }
 
+QString Launcher::getHostCommand()
+{
+	 return QString("bash -mvlc \"nc -l %1 | %2 mplayer -demuxer rawvideo -rawvideo fps=15:w=%3:h=%4:format=rgba -\"")
+						.arg(m_port)
+						.arg(m_compression > 0 ? QString("gzip -dc |") : "")
+						.arg(m_width)
+						.arg(m_height);
+
+
+}
+
 bool Launcher::host()
 {
-    QString command = QString("bash -mvlc \"nc -l %3 | gzip -dc | mplayer -demuxer rawvideo -rawvideo fps=12:w=%1:h=%2:format=rgba -\"")
-                        .arg(m_width)
-                        .arg(m_height)
-                        .arg(m_port);
+    QString command = this->getHostCommand();
 
    return this->launch(command);
 }

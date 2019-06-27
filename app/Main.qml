@@ -16,7 +16,7 @@ MainView {
     objectName: "mainView"
 
     // Note! applicationName needs to match the "name" field of the click manifest
-    applicationName: "mircast.etherpulse"
+    applicationName: "mircast.darkeye"
 
     width: units.gu(100)
     height: units.gu(75)
@@ -24,18 +24,30 @@ MainView {
 
     Settings {
         id:mircastSettings
+        property var portNumber: 12345
         property var remoteIP: ""
         property var screenWidth: Screen.width / 2
         property var screenHeight: Screen.height / 2
         property var compression: 7
+        property var autoHostConfig: true
     }
 
     Launcher {
         id: launcher
     }
 
+	Component.onCompleted: {
+		launcher.compression = mircastSettings.compression;
+		launcher.width = mircastSettings.screenWidth;
+		launcher.height = mircastSettings.screenHeight;
+	}
+
+
 
     BasePage {
+		anchors {
+			margins:units.gu(0.5)
+		}
         id:mainPage
     }
 
@@ -44,9 +56,10 @@ MainView {
         visible: false
         contentType: ContentType.Text
         handler: ContentHandler.Share
+        peer:exportPeer
 
         onPeerSelected: {
-            exportPeer.selectionType = ContentTransfer.Single
+            peer.selectionType = ContentTransfer.Single
             this.visible = false;
         }
         onCancelPressed:  {

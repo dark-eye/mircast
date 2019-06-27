@@ -2,7 +2,9 @@ import QtQuick 2.4
 import QtQuick.Window 2.2
 import Ubuntu.Components 1.3
 
-Item {
+Flickable {
+
+	id:devicePage
 
      anchors {
         top: parent.top
@@ -10,6 +12,8 @@ Item {
         right:parent.right
         bottom:parent.bottom
     }
+    enabled: launcher.canCast
+    interactive:true
 
     onFocusChanged: {
         if(!screenHeight.text) {
@@ -113,6 +117,7 @@ Item {
         }
     }
     Column {
+		id:infoColumn
         anchors {
             left:parent.left
             right:parent.right
@@ -122,6 +127,7 @@ Item {
         spacing: units.gu(1)
 
         DeviceInstructions {
+			id:deviceInstruct
             anchors {
                 left:parent.left
                 right:parent.right
@@ -136,8 +142,16 @@ Item {
                 right:parent.right
                 margins: units.gu(2)
             }
+            height: castButton.y  - deviceInstruct.height - infoColumn.y  - units.gu(2)
             readOnly: true
-            text: launcher.output
+
+            Connections {
+				target:launcher
+				onOutputChanged: {
+					outputLog.text = "Output:\n"
+					outputLog.append(launcher.output);
+				}
+			}
         }
     }
 
@@ -166,5 +180,18 @@ Item {
             }
         }
     }
+
+    Component.onCompleted: {
+		if(!enabled ) {
+			unavailableComponent.createObject(devicePage,{z:100});
+		}
+	}
+
+	Component {
+		id:unavailableComponent
+		Unavailable {
+			anchors.fill:parent
+		}
+	}
 
 }

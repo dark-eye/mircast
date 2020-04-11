@@ -1,8 +1,8 @@
 [Desktop Entry]
 _Name=mircast
 Comment=Cast the device screen in to a remote computer for capturing and demo purposes
-Exec=@EXEC@
-Icon=@ICON@
+Exec=qmlscene %U share/qml/mircast/Main.qml
+Icon=graphics/mircast.png
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true

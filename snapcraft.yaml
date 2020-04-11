@@ -1,5 +1,5 @@
 name: test-miracast-desktop
-version: 0.1
+version: "0.1"
 summary: Cast your Mir display
 description: |
   Cast the device screen in to a remote computer for capturing and demo purposes
